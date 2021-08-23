@@ -65,44 +65,60 @@ java -jar target/floorplan-app-1.0.jar --jasypt.encryptor.password=
 
 http://localhost:8080/swagger-ui.html
 
-### Send Message API Request 
+# Project 
+### Create Project Request 
 
 ```
-{
-  "sender": "james",
-  "recipient": "kranthi",
-  "shortMessage": "string",
-}
+ curl -X POST "https://floorplan-app-kk.herokuapp.com/api/project" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"name\": \"projet1\"}"
 
-curl -X POST "http://localhost:8080/api/message" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"recipient\": \"string\", \"sender\": \"string\", \"shortMessage\": \"string\",}"
 ```
 When Success , it returns ID of the message and http status code 200
 
-### getMessagesForSender
+### Get Project By Id
 ```
-curl -X GET "http://localhost:8080/api/message/kranthi" -H "accept: */*"
+curl -X GET "https://floorplan-app-kk.herokuapp.com/api/project/1" -H "accept: */*"
 
-or 
-
-curl -X GET "http://localhost:8080/api/message/kranthi?numberOfDays=30" -H "accept: */*"
 ```
-numberOfDays -> Is optional parameter 
 
-
-### getMessageBetweenSenderAndReceiver
+### Update Project 
 ```
-curl -X GET "http://localhost:8080/api/message/kranthi/sam" -H "accept: */*""
+curl -X PATCH "https://floorplan-app-kk.herokuapp.com/api/project" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"id\": 1, \"name\": \"Project1_updated\"}"
 
-or 
-
-curl -X GET "http://localhost:8080/api/message/kranthi/sam?numberOfDays=30" -H "accept: */*""
 ```
-numberOfDays -> Is optional parameter 
 
+### Delete Project 
+```
+curl -X DELETE "https://floorplan-app-kk.herokuapp.com/api/project/1" -H "accept: */*"
 
-when there are no messages for the specific user, Service will return http status code as 204
+```
+ 
+ 
+# FloorPlan  
+### Create FloorPlan Request 
 
+```
+curl -X POST "http://localhost:8080/api/floorplan?name=FloorPlan-1&projectId=1" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "file=@floorplan2.jpg;type=image/jpeg"
 
+```
+When Success , it returns ID of the message and http status code 200
+
+### Get Project By Id
+```
+curl -X GET "http://localhost:8080/api/floorplan/4" -H "accept: */*"
+
+```
+
+### Update Project 
+```
+curl -X PATCH "http://localhost:8080/api/floorplan?id=4&name=Floorplan-4-Updated&projectId=1" -H "accept: */*" -H "Content-Type: multipart/form-data" -d {"file":{}}
+
+```
+
+### Delete Project 
+```
+curl -X DELETE "http://localhost:8080/api/floorplan/4" -H "accept: */*"
+
+``` 
 This APP is also available on heroku. Please reach me if the following url is not showing up.  
 
-https://simple-chat-app-kk.herokuapp.com/swagger-ui.html
+https://floorplan-app-kk.herokuapp.com/swagger-ui.html
