@@ -45,10 +45,11 @@ During the boot time, Project and floorplan table will be created.  Create stat
 # Future state 
 ![Future State](https://user-images.githubusercontent.com/9857819/130499571-80aa3a4f-abe7-45b4-8cc2-d5e4de09b289.png)
 
-* Registration Service will help create the user accounts and stores them in the database. 
-* Web sockets service is going to create a communication channel between a server and the user. And the information is going to be stored in the distributed Cache
-* Message service will accept all the incoming messages and it can look up the user information in the distributed cache to push the message to the respective user. 
-* We can use CDN systems like S3 to store the images/videos and other attachments 
+* User Services will help to create the users who maintains the projects and floorplans 
+* Authentication Service helps to secure the services. 
+* Distributed Cache is critical to load the images/data faster/ 
+* Pubsub/rabbitmq queues are helpful to handle the messages asynchronously. 
+
 
 # Tech Debt 
 * Authentication and Autherization 
@@ -57,9 +58,9 @@ During the boot time, Project and floorplan table will be created.  Create stat
 
 # Steps to build and run the job 
 
-git clone https://github.com/kranthides/simple-chat-app.git
-cd simple-chat-app
-mvn spring-boot:run
+git clone https://github.com/kranthides/floorplan-app.git
+cd floorplan-app 
+mvn -Djasypt.encryptor.password=aU2Yuj3hKAd4 spring-boot:run 
 
 http://localhost:8080/swagger-ui.html
 
