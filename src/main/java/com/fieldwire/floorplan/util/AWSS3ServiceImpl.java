@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,11 @@ public class AWSS3ServiceImpl implements AWSS3Service {
     }
  
     private File uploadThumbNail(FloorPlan floorPlan, final File file) throws IOException {
-    	
+		String fileExtenstion = FilenameUtils.getExtension(floorPlan.getThumbNail());
+
  
     	File thumbNailOutput = new File(floorPlan.getThumbNail());
-    	Thumbnails.of(file).size(100, 100).outputFormat("jpg").toFile(thumbNailOutput);
+    	Thumbnails.of(file).size(100, 100).outputFormat(fileExtenstion).toFile(thumbNailOutput);
 
     	uploadFileToS3Bucket(bucketName, thumbNailOutput, floorPlan.getThumbNail());
     	
@@ -72,9 +74,10 @@ public class AWSS3ServiceImpl implements AWSS3Service {
     
     private File uploadLargeFile(FloorPlan floorPlan, final File file) throws IOException {
     	
- 
+		String fileExtenstion = FilenameUtils.getExtension(floorPlan.getLarge());
+
     	File largeFile = new File(floorPlan.getLarge());
-    	Thumbnails.of(file).size(2000, 2000).outputFormat("jpg").toFile(largeFile);
+    	Thumbnails.of(file).size(2000, 2000).outputFormat(fileExtenstion).toFile(largeFile);
 
     	uploadFileToS3Bucket(bucketName, largeFile,floorPlan.getLarge());
     	
