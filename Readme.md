@@ -60,7 +60,8 @@ During the boot time, Project and floorplan table will be created.  Create stat
 
 git clone https://github.com/kranthides/floorplan-app.git
 cd floorplan-app 
-mvn -Djasypt.encryptor.password=aU2Yuj3hKAd4 spring-boot:run 
+mvn clean package 
+java -jar target/floorplan-app-1.0.jar --jasypt.encryptor.password=
 
 http://localhost:8080/swagger-ui.html
 
