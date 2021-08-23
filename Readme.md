@@ -26,27 +26,24 @@ Tech Stack
  
 For the simplicity of the app, I have created an object to store the messages. column sentDate will be helpful to test the old messages. 
 
-![Data Model](https://user-images.githubusercontent.com/9857819/126576422-66b62435-6e2e-48a9-a20c-421d13eecf5f.png)
+![Data Model](https://user-images.githubusercontent.com/9857819/130498105-b5d81252-8fe6-4bf3-a82c-07976f2803e3.png)
 
 During the boot time, Project and floorplan table will be created.  Create statements can be found at 
 
-[data.sql](https://github.com/kranthides/simple-chat-app/blob/master/src/main/resources/data.sql).
+[data.sql](https://github.com/kranthides/floorplan-app/blob/main/src/main/resources/data.sql).
 
 
 # Architecture - Current State
 
-![Design Document](https://user-images.githubusercontent.com/9857819/126578123-63806b97-8c3c-49fa-b930-f928663a6440.png)
+![Design Document](https://user-images.githubusercontent.com/9857819/130499873-ea98bd7f-8706-4cbc-ba46-a73d2a2864e3.png)
 
-User1 & USer2 can communicate using the above-mentioned APIs, All the incoming messages are going to store in the database.  
 
 **Limitations of the current design**
-* If the database is down for maintenance or for other reasons, messages will be lost. 
-* All the communications are happening are using the HTTP protocol. The user always needs to submit the request to the server to get the latest messages. There is no continuous polling/connection to the server. 
-* If we want to start storing the images, the database is not going to help us to scale. 
-* Database is going to act as the bottleneck if the volume of messages increases. 
+* If the database is down for maintenance or for other reasons, data will be lost. 
+* I am using the relational database for the simiplicity, For this APP NoSQL / MongoDB will be more ideal. 
 
 # Future state 
-![Future State](https://user-images.githubusercontent.com/9857819/126579186-dedae732-9c05-4c96-8895-615c36d3ee08.png)
+![Future State](https://user-images.githubusercontent.com/9857819/130499571-80aa3a4f-abe7-45b4-8cc2-d5e4de09b289.png)
 
 * Registration Service will help create the user accounts and stores them in the database. 
 * Web sockets service is going to create a communication channel between a server and the user. And the information is going to be stored in the distributed Cache
